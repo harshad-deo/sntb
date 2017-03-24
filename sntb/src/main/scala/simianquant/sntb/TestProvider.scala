@@ -6,9 +6,33 @@ import reflect.macros.{ParseException, TypecheckException}
 
 trait TestProvider {
 
+  private var runList: List[Block] = Nil
+
+  private val className = this.getClass.getSimpleName()
+
   def assertCompiles(str: String): Unit = macro TestProvider.assertCompilesImpl
 
   def assertTypeError(str: String): Unit = macro TestProvider.assertTypeErrorImpl
+
+  object it {
+    def should(name: String): BlockBuilder = BlockBuilder(name)
+  }
+
+  def run: Unit = {
+    println(s"$className: ")
+    runList foreach {
+      case Block(name, exec) =>
+        print(s"- $name...")
+        exec()
+        println("done")
+    }
+  }
+
+  case class BlockBuilder(name: String) {
+    def in(exec: => Unit): Unit = runList = new Block(name, () => exec) :: runList
+  }
+
+  private case class Block(name: String, exec: Function0[Unit])
 
 }
 

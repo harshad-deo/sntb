@@ -9,7 +9,8 @@ lazy val sntb = project
     nativeMode := "release",
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
-    )
+    ),
+    incOptions := incOptions.value.withLogRecompileOnMacro(false)
   )
 
 lazy val sntbtests = project
