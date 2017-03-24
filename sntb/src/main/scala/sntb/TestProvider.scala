@@ -20,7 +20,7 @@ trait TestProvider {
   }
 
   def run: Unit = {
-    println(s"$className: ")
+    println(s"${Console.GREEN}$className: ${Console.RESET}")
     runList foreach {
       case Block(name, exec) =>
         print(s"- $name...")
