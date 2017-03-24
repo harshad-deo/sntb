@@ -15,6 +15,6 @@ before_install:
   - sudo apt-get -qq update
   - sudo apt-get install -y libgc-dev clang++-3.7 llvm-3.7 llvm-3.7-dev llvm-3.7-runtime llvm-3.7-tool libunwind7-dev
 
-  script:
+script:
   - java -version
   - sbt 'clean' 'nativeLink'
