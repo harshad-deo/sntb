@@ -1,6 +1,7 @@
-package simianquant.sntb
+package sntb
 
 import language.experimental.macros
+import language.implicitConversions
 import reflect.macros.blackbox.Context
 import reflect.macros.{ParseException, TypecheckException}
 
@@ -33,6 +34,12 @@ trait TestProvider {
   }
 
   private case class Block(name: String, exec: Function0[Unit])
+
+  final class TSEQ[T](lhs: T) {
+    def ===(rhs: T): Boolean = lhs == rhs
+  }
+
+  implicit def tseqBuilder[T](lhs: T): TSEQ[T] = new TSEQ(lhs)
 
 }
 

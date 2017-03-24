@@ -1,4 +1,4 @@
-package simianquant.sntbtests
+package sntbtests
 
 object Runner {
 

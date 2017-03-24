@@ -5,6 +5,7 @@ lazy val sntb = project
   .settings(
     name := "SNTB",
     version := "0.1-SNAPSHOT",
+    organization := "com.simianquant",
     scalaVersion := "2.11.8",
     nativeMode := "release",
     libraryDependencies ++= Seq(

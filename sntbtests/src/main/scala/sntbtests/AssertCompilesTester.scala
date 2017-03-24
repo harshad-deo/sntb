@@ -1,6 +1,6 @@
-package simianquant.sntbtests
+package sntbtests
 
-import simianquant.sntb.TestProvider
+import sntb.TestProvider
 import util.Try
 
 class AssertCompilesTester extends TestProvider {
@@ -23,6 +23,7 @@ class AssertCompilesTester extends TestProvider {
     assertCompiles("bar + 3.14")
     assertCompiles("baz * 2")
     assertCompiles("quux / 2")
+    assertCompiles("4.55 === 4.55")
   }
 
   it should "pass assertCompiles failure" in {
