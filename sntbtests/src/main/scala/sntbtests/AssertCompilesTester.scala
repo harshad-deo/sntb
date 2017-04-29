@@ -29,6 +29,7 @@ class AssertCompilesTester extends TestProvider {
   it should "pass assertCompiles failure" in {
     assert(Try(assertCompiles("a = 42")).isFailure)
     assert(Try(assertCompiles("implicitly[Numeric[String]]")).isFailure)
+    assert(Try(assertCompiles("implicitly[Numeric[String]")).isFailure)
     assert(Try(assertCompiles("implicitly[Numer ic[Int]]")).isFailure)
   }
 

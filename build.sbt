@@ -4,9 +4,9 @@ lazy val sntb = project
   .in(file("sntb"))
   .settings(
     name := "SNTB",
-    version := "0.1",
+    version := Settings.version,
     organization := "com.simianquant",
-    scalaVersion := "2.11.8",
+    scalaVersion := Settings.scalaVersion,
     nativeMode := "release",
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
@@ -44,8 +44,8 @@ lazy val sntbtests = project
   .in(file("sntbtests"))
   .settings(
     name := "SNTB-TESTS",
-    version := "0.1",
-    scalaVersion := "2.11.8",
+    version := Settings.version,
+    scalaVersion := Settings.scalaVersion,
     nativeMode := "release",
     incOptions := incOptions.value.withLogRecompileOnMacro(false)
   )
