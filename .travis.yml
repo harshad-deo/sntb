@@ -33,6 +33,7 @@ before_install:
   - sudo make install prefix=/usr
   - make testinstall prefix=/usr
   - popd
+  - sudo chmod +x /usr/local/bin/sbt
 
 script:
   - java -version
