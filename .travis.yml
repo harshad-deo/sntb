@@ -36,4 +36,5 @@ before_install:
 
 script:
   - java -version
-  - sudo sbt clean run
+  - which sbt
+  - sbt clean run
