@@ -5,9 +5,18 @@ language:
   "scala"
 
 scala:
-  - "2.11.8"
+  - "2.11.11"
 
 before_install:
+  - sudo apt-get install -y make
+  - export CXX=clang++-3.7
+  - git clone https://code.googlesource.com/re2
+  - pushd re2
+  - git checkout 2017-03-01
+  - make -j4 test
+  - sudo make install prefix=/usr
+  - make testinstall prefix=/usr
+  - popd
   - sudo apt-get -qq update
   - sudo sh -c "echo 'deb http://llvm.org/apt/precise/ llvm-toolchain-precise-3.7 main' >> /etc/apt/sources.list"
   - sudo sh -c "echo 'deb http://llvm.org/apt/precise/ llvm-toolchain-precise main' >> /etc/apt/sources.list"
