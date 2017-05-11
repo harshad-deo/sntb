@@ -2,8 +2,10 @@ package sntb
 
 import language.experimental.macros
 import language.implicitConversions
+import reflect.ClassTag
 import reflect.macros.blackbox.Context
 import reflect.macros.{ParseException, TypecheckException}
+import util.{Failure, Success, Try}
 
 trait TestProvider {
 
@@ -19,9 +21,18 @@ trait TestProvider {
     def should(name: String): BlockBuilder = BlockBuilder(name)
   }
 
+  def intercept[T <: RuntimeException](arg: => Any)(implicit ct: ClassTag[T]): T =
+    try {
+      arg
+      throw new RuntimeException("Value was not an error")
+    } catch {
+      case x: T => x
+      case _: Throwable => throw new RuntimeException(s"Error was not an instance of the expected type")
+    }
+
   def run: Unit = {
     println(s"${Console.GREEN}$className: ${Console.RESET}")
-    runList foreach {
+    runList.reverse foreach {
       case Block(name, exec) =>
         print(s"- $name...")
         exec()
