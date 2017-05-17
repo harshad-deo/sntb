@@ -35,8 +35,10 @@ trait TestProvider {
     runList.reverse foreach {
       case Block(name, exec) =>
         print(s"- $name...")
+        val initTime = System.currentTimeMillis
         exec()
-        println("done")
+        val endTime = System.currentTimeMillis
+        println(s"done (${TestProvider.formatTime(endTime - initTime)}) ")
     }
   }
 
@@ -55,6 +57,36 @@ trait TestProvider {
 }
 
 object TestProvider {
+
+  private def formatTime(millis: Long): String = {
+    var result = ""
+    var opr = millis
+    val min = opr / 60000l
+    if(min > 0){
+      if(min == 1){
+        result = "1 minute"
+      }else {
+        result = s"$min minutes"
+      }
+    }
+    opr %= 60000
+    val sec = opr / 1000l
+    if(sec > 0){
+      val spacer = if(result.isEmpty) "" else " "
+      if(sec == 1){
+        result += s"${spacer}1 second"
+      }else {
+        result += s"{$spacer}$sec seconds"
+      }
+    }
+    opr %= 1000
+    val spacer = if(result.isEmpty) "" else " "
+    if(opr == 1){
+      result + s"${spacer}1 millisecond"
+    }else {
+      result + s"${spacer}$opr milliseconds"
+    }
+  }
 
   def assertCompilesImpl(c: Context)(str: c.Tree): c.Tree = {
     import c.universe._
