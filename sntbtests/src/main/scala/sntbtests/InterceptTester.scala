@@ -12,10 +12,10 @@ class InterceptTester extends TestProvider {
     intercept[ArithmeticException] {
       0 / 0
     }
-    intercept[NoSuchElementException]{
+    intercept[NoSuchElementException] {
       Nil.head
     }
-    intercept[UnsupportedOperationException]{
+    intercept[UnsupportedOperationException] {
       Nil.tail
     }
   }

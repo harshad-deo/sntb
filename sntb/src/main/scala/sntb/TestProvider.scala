@@ -62,28 +62,28 @@ object TestProvider {
     var result = ""
     var opr = millis
     val min = opr / 60000l
-    if(min > 0){
-      if(min == 1){
+    if (min > 0) {
+      if (min == 1) {
         result = "1 minute"
-      }else {
+      } else {
         result = s"$min minutes"
       }
     }
     opr %= 60000
     val sec = opr / 1000l
-    if(sec > 0){
-      val spacer = if(result.isEmpty) "" else " "
-      if(sec == 1){
+    if (sec > 0) {
+      val spacer = if (result.isEmpty) "" else " "
+      if (sec == 1) {
         result += s"${spacer}1 second"
-      }else {
+      } else {
         result += s"{$spacer}$sec seconds"
       }
     }
     opr %= 1000
-    val spacer = if(result.isEmpty) "" else " "
-    if(opr == 1){
+    val spacer = if (result.isEmpty) "" else " "
+    if (opr == 1) {
       result + s"${spacer}1 millisecond"
-    }else {
+    } else {
       result + s"${spacer}$opr milliseconds"
     }
   }
@@ -91,7 +91,7 @@ object TestProvider {
   def assertCompilesImpl(c: Context)(str: c.Tree): c.Tree = {
     import c.universe._
     str match {
-      case q"${ y: String }" =>
+      case q"${y: String}" =>
         util.Try {
           val parsed = c.parse(y)
           val typechecked = c.typecheck(parsed)
@@ -109,7 +109,7 @@ object TestProvider {
   def assertTypeErrorImpl(c: Context)(str: c.Tree): c.Tree = {
     import c.universe._
     str match {
-      case q"${ y: String }" =>
+      case q"${y: String}" =>
         util.Try {
           val parsed = c.parse(y)
           val typechecked = c.typecheck(parsed)
