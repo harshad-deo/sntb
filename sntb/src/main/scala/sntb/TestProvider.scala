@@ -76,7 +76,7 @@ object TestProvider {
       if (sec == 1) {
         result += s"${spacer}1 second"
       } else {
-        result += s"{$spacer}$sec seconds"
+        result += s"$spacer$sec seconds"
       }
     }
     opr %= 1000
