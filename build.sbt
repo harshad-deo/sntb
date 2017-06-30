@@ -7,7 +7,6 @@ lazy val sntb = project
     version := Settings.version,
     organization := "com.simianquant",
     scalaVersion := Settings.scalaVersion,
-    crossScalaVersions := Settings.crossScalaVersions,
     nativeMode := "release",
     libraryDependencies ++= Seq(
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
@@ -46,7 +45,6 @@ lazy val sntbtests = project
   .settings(
     name := "SNTB-TESTS",
     version := Settings.version,
-    crossScalaVersions := Settings.crossScalaVersions,
     scalaVersion := Settings.scalaVersion,
     nativeMode := "release",
     incOptions := incOptions.value.withLogRecompileOnMacro(false)
