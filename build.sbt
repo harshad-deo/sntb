@@ -4,9 +4,9 @@ lazy val root = project
   .in(file("."))
   .settings(
     name := "sntb",
-    version := Settings.version,
+    version := "0.3.1",
     organization := "com.simianquant",
-    scalaVersion := Settings.scalaVersion,
+    scalaVersion := "2.11.11",
     nativeMode := "release",
     libraryDependencies ++= Seq(
       "org.scala-native" % "test-interface_native0.3_2.11" % "0.3.2",
