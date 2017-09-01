@@ -13,15 +13,15 @@ abstract class TestProvider {
 
   private val className = this.getClass.getSimpleName()
 
-  def assertCompiles(str: String): Unit = macro TestProvider.assertCompilesImpl
+  protected def assertCompiles(str: String): Unit = macro TestProvider.assertCompilesImpl
 
-  def assertTypeError(str: String): Unit = macro TestProvider.assertTypeErrorImpl
+  protected def assertTypeError(str: String): Unit = macro TestProvider.assertTypeErrorImpl
 
-  object it {
+  protected object it {
     def should(name: String): BlockBuilder = BlockBuilder(name)
   }
 
-  def intercept[T <: RuntimeException](arg: => Any)(implicit ct: ClassTag[T]): T =
+  protected def intercept[T <: RuntimeException](arg: => Any)(implicit ct: ClassTag[T]): T =
     try {
       arg
       throw new RuntimeException("Value was not an error")
@@ -30,7 +30,7 @@ abstract class TestProvider {
       case _: Throwable => throw new RuntimeException(s"Error was not an instance of the expected type")
     }
 
-  def run(): Unit = {
+  final def run(): Unit = {
     println(s"${Console.GREEN}$className: ${Console.RESET}")
     runList.reverse foreach {
       case Block(name, exec) =>
@@ -42,17 +42,17 @@ abstract class TestProvider {
     }
   }
 
-  case class BlockBuilder(name: String) {
+  protected case class BlockBuilder(name: String) {
     def in(exec: => Unit): Unit = runList = new Block(name, () => exec) :: runList
   }
 
   private case class Block(name: String, exec: Function0[Unit])
 
-  final class TSEQ[T](lhs: T) {
+  protected final class TSEQ[T](lhs: T) {
     def ===(rhs: T): Boolean = lhs == rhs
   }
 
-  implicit def tseqBuilder[T](lhs: T): TSEQ[T] = new TSEQ(lhs)
+  protected implicit def tseqBuilder[T](lhs: T): TSEQ[T] = new TSEQ(lhs)
 
 }
 
