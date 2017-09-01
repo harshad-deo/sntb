@@ -1,16 +1,18 @@
 enablePlugins(ScalaNativePlugin)
 
-lazy val sntb = project
-  .in(file("sntb"))
+lazy val root = project
+  .in(file("."))
   .settings(
-    name := "SNTB",
+    name := "sntb",
     version := Settings.version,
     organization := "com.simianquant",
     scalaVersion := Settings.scalaVersion,
     nativeMode := "release",
     libraryDependencies ++= Seq(
+      "org.scala-native" % "test-interface_native0.3_2.11" % "0.3.2",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     ),
+    testFrameworks += new TestFramework("sntb.SntbFramework"),
     incOptions := incOptions.value.withLogRecompileOnMacro(false),
     publishMavenStyle := true,
     publishArtifact in Test := false,
@@ -39,17 +41,3 @@ lazy val sntb = project
         </developer>
       </developers>)
   )
-
-lazy val sntbtests = project
-  .in(file("sntbtests"))
-  .settings(
-    name := "SNTB-TESTS",
-    version := Settings.version,
-    scalaVersion := Settings.scalaVersion,
-    nativeMode := "release",
-    incOptions := incOptions.value.withLogRecompileOnMacro(false)
-  )
-  .dependsOn(sntb)
-  .aggregate(sntb)
-
-onLoad in Global := (Command.process("project sntbtests", _: State)) compose (onLoad in Global).value

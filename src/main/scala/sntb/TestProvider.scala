@@ -7,7 +7,7 @@ import reflect.macros.blackbox.Context
 import reflect.macros.{ParseException, TypecheckException}
 import util.{Failure, Success, Try}
 
-trait TestProvider {
+abstract class TestProvider {
 
   private var runList: List[Block] = Nil
 
@@ -30,7 +30,7 @@ trait TestProvider {
       case _: Throwable => throw new RuntimeException(s"Error was not an instance of the expected type")
     }
 
-  def run: Unit = {
+  def run(): Unit = {
     println(s"${Console.GREEN}$className: ${Console.RESET}")
     runList.reverse foreach {
       case Block(name, exec) =>
