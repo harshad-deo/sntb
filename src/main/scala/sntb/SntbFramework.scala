@@ -19,7 +19,7 @@ final class SntbFramework extends Framework {
       override final def remoteArgs: Array[String] = ras
 
       override final def done(): String =
-        "----------------------------------- Done -----------------------------------"
+        "-------------------------------------------------- Done --------------------------------------------------"
 
       override final def tasks(taskDefs: Array[TaskDef]): Array[Task] = taskDefs.map(makeTask)
 
