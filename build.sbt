@@ -4,7 +4,7 @@ lazy val root = project
   .in(file("."))
   .settings(
     name := "sntb",
-    version := "0.3.2-SNAPSHOT",
+    version := "0.3.3",
     organization := "com.simianquant",
     scalaVersion := "2.11.11",
     nativeMode := "release",
