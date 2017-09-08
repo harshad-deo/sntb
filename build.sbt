@@ -4,12 +4,12 @@ lazy val root = project
   .in(file("."))
   .settings(
     name := "sntb",
-    version := "0.3.1",
+    version := "0.3.2-SNAPSHOT",
     organization := "com.simianquant",
     scalaVersion := "2.11.11",
     nativeMode := "release",
     libraryDependencies ++= Seq(
-      "org.scala-native" % "test-interface_native0.3_2.11" % "0.3.2",
+      "org.scala-native" % "test-interface_native0.3_2.11" % "0.3.3",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     ),
     testFrameworks += new TestFramework("sntb.SntbFramework"),
